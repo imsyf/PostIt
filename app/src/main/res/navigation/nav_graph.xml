@@ -7,6 +7,52 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="it.post.app.ui.login.LoginFragment"
-        android:label="@string/login" />
+        android:label="@string/login">
+
+        <action
+            android:id="@+id/to_registerFragment"
+            app:destination="@id/registerFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="it.post.app.ui.register.RegisterFragment"
+        android:label="@string/register" />
+
+    <fragment
+        android:id="@+id/feedFragment"
+        android:name="it.post.app.ui.feed.FeedFragment"
+        android:label="@string/feed">
+
+        <action
+            android:id="@+id/to_postFragment"
+            app:destination="@id/postFragment" />
+
+        <action
+            android:id="@+id/to_uploadFragment"
+            app:destination="@id/uploadFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/uploadFragment"
+        android:name="it.post.app.ui.upload.UploadFragment"
+        android:label="@string/create_new_post" />
+
+    <fragment
+        android:id="@+id/postFragment"
+        android:name="it.post.app.ui.post.PostFragment"
+        android:label="{name}">
+
+        <argument
+            android:name="name"
+            app:argType="string" />
+
+        <argument
+            android:name="storyId"
+            app:argType="string" />
+
+    </fragment>
 
 </navigation>

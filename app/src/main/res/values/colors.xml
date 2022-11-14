@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="ucrop_color_statusbar">#6750A4</color>
+    <color name="ucrop_color_toolbar">#FFFBFE</color>
+    <color name="ucrop_color_widget_active">#6750A4</color>
 </resources>

@@ -24,7 +24,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -36,6 +36,7 @@ android {
         jvmTarget = "1.8"
     }
     buildFeatures {
+        dataBinding = true
         viewBinding = true
     }
 }
@@ -46,8 +47,30 @@ dependencies {
     implementation(AndroidX.constraintLayout)
     implementation(Google.android.material)
 
+    implementation(AndroidX.dataStore.preferences)
+
     implementation(AndroidX.navigation.fragmentKtx)
     implementation(AndroidX.navigation.uiKtx)
+
+    implementation(AndroidX.swipeRefreshLayout)
+
+    implementation(Square.moshi)
+    implementation(Square.moshi.adapters)
+    kapt(Square.moshi.kotlinCodegen)
+
+    implementation(Square.retrofit2.converter.moshi)
+    implementation(Square.retrofit2.retrofit)
+
+    implementation(libs.epoxy)
+    implementation(libs.epoxy.databinding)
+    kapt(libs.epoxy.processor)
+
+    implementation(libs.fluentui.persona)
+    implementation(libs.glide)
+    implementation(libs.imagePicker)
+    implementation(libs.kotlinResult)
+    implementation(libs.networkResponseAdapter)
+    implementation(libs.toasty)
 
     testImplementation(Testing.junit4)
     androidTestImplementation(AndroidX.test.ext.junit)

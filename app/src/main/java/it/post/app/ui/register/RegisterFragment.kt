@@ -1,4 +1,4 @@
-package it.post.app.ui.login
+package it.post.app.ui.register
 
 import android.os.Bundle
 import android.util.Patterns
@@ -14,23 +14,22 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import androidx.navigation.fragment.findNavController
 import it.post.app.PostItApp
 import it.post.app.R
-import it.post.app.databinding.FragmentLoginBinding
+import it.post.app.databinding.FragmentRegisterBinding
 import it.post.app.ui.common.showToasty
 import kotlinx.coroutines.launch
 
-class LoginFragment : Fragment() {
+class RegisterFragment : Fragment() {
 
-    private var _binding: FragmentLoginBinding? = null
+    private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel by viewModels<LoginViewModel> {
+    private val viewModel by viewModels<RegisterViewModel> {
         viewModelFactory {
             initializer {
                 val app = activity?.application as PostItApp
-                LoginViewModel(app.storyRepository)
+                RegisterViewModel(app.storyRepository)
             }
         }
     }
@@ -40,7 +39,7 @@ class LoginFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -58,49 +57,57 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun FragmentLoginBinding.setup() {
-        loginEmail.doOnTextChanged { text, _, _, _ ->
+    private fun FragmentRegisterBinding.setup() {
+        registerName.doOnTextChanged { text, _, _, _ ->
+            val name = "$text"
+
+            if (name.isBlank()) {
+                labelForRegisterName.error = getString(R.string.name_validation_error)
+            } else {
+                labelForRegisterName.error = null
+            }
+
+            viewModel.onNameChanged(name, labelForRegisterName.error == null)
+        }
+
+        registerEmail.doOnTextChanged { text, _, _, _ ->
             val email = "$text"
 
             if (email.isBlank() || Patterns.EMAIL_ADDRESS.matcher(email).matches().not()) {
-                labelForLoginEmail.error = getString(R.string.email_validation_error)
+                labelForRegisterEmail.error = getString(R.string.email_validation_error)
             } else {
-                labelForLoginEmail.error = null
+                labelForRegisterEmail.error = null
             }
 
-            viewModel.onEmailChanged(email, labelForLoginEmail.error == null)
+            viewModel.onEmailChanged(email, labelForRegisterEmail.error == null)
         }
 
-        loginPassword.doOnTextChanged { text, _, _, _ ->
+        registerPassword.doOnTextChanged { text, _, _, _ ->
             val password = "$text"
 
             if (password.isBlank() || password.length < 6) {
-                labelForLoginPassword.error = getString(R.string.password_validation_error)
+                labelForRegisterPassword.error = getString(R.string.password_validation_error)
             } else {
-                labelForLoginPassword.error = null
+                labelForRegisterPassword.error = null
             }
 
-            viewModel.onPasswordChanged(password, labelForLoginPassword.error == null)
-        }
-
-        login.setOnClickListener {
-            root.requestFocus()
-            viewModel.login()
+            viewModel.onPasswordChanged(password, labelForRegisterPassword.error == null)
         }
 
         register.setOnClickListener {
-            val directions = LoginFragmentDirections.toRegisterFragment()
-            findNavController().navigate(directions)
+            root.requestFocus()
+            viewModel.register()
         }
     }
 
-    private fun FragmentLoginBinding.render(state: LoginState) {
+    private fun FragmentRegisterBinding.render(state: RegisterState) {
         loading.isVisible = state.isSubmitting
 
-        loginEmail.isEnabled = !state.isSubmitting
-        loginPassword.isEnabled = !state.isSubmitting
+        registerName.isEnabled = !state.isSubmitting
+        registerEmail.isEnabled = !state.isSubmitting
+        registerPassword.isEnabled = !state.isSubmitting
 
-        login.isEnabled = state.canLogin
+        register.isEnabled = state.canRegister
 
         state.message?.let {
             showToasty(it, viewModel::onMessageShown)

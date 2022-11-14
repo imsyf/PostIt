@@ -2,8 +2,38 @@
 
 [versions]
 
+epoxy = "5.1.0"
+
+fluentui-persona = "0.1.2"
+
+glide = "4.14.2"
+
+imagePicker = "2.3.20"
+
+kotlinResult = "1.1.16"
+
 ktlint = "0.47.1"
+
+networkResponseAdapter = "5.0.0"
+
+toasty = "1.5.2"
 
 [libraries]
 
+epoxy = { group = "com.airbnb.android", name = "epoxy", version.ref = "epoxy" }
 
+epoxy-databinding = { group = "com.airbnb.android", name = "epoxy-databinding", version.ref = "epoxy" }
+
+epoxy-processor = { group = "com.airbnb.android", name = "epoxy-processor", version.ref = "epoxy" }
+
+fluentui-persona = { group = "com.microsoft.fluentui", name = "fluentui_persona", version.ref = "fluentui-persona" }
+
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+
+imagePicker = { group = "com.github.Drjacky", name = "ImagePicker", version.ref = "imagePicker" }
+
+kotlinResult = { group = "com.michael-bull.kotlin-result", name = "kotlin-result", version.ref = "kotlinResult" }
+
+networkResponseAdapter = { group = "com.github.haroldadmin", name = "NetworkResponseAdapter", version.ref = "networkResponseAdapter" }
+
+toasty = { group = "com.github.GrenderG", name = "Toasty", version.ref = "toasty" }

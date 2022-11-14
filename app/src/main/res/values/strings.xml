@@ -9,4 +9,23 @@
     <string name="create_new_account">Create new account</string>
     <string name="email_validation_error">Not a valid email address</string>
     <string name="password_validation_error">Must be at least 6 characters</string>
+    <string name="feed">Feed</string>
+    <string name="register">Register</string>
+    <string name="post">Post</string>
+    <string name="login_welcome">Welcome back, %s!</string>
+    <string name="register_welcome">Welcome aboard, %s!</string>
+    <string name="page_loaded">Finished loading Page %d</string>
+    <string name="fetching_failed">Failed to fetch remote data</string>
+    <string name="try_again">Try Again</string>
+    <string name="try_pull_to_refresh">Try pull to refresh</string>
+    <string name="name">Name</string>
+    <string name="name_validation_error">Name can\'t be empty</string>
+    <string name="desc_validation_error">Description can\'t be empty</string>
+    <string name="logging_you_in">Created new account, logging you in</string>
+    <string name="new_post">New post</string>
+    <string name="create_new_post">Create new post</string>
+    <string name="upload">Upload</string>
+    <string name="no_image_selected">Your image will appear here</string>
+    <string name="description">Description</string>
+    <string name="image_uploaded">Image uploaded</string>
 </resources>
