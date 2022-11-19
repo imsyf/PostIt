@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -13,15 +14,14 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.fragment.navArgs
 import it.post.app.PostItApp
-import it.post.app.askToPull
-import it.post.app.databinding.EpoxyLayoutBinding
-import it.post.app.postDetails
+import it.post.app.databinding.FragmentPostBinding
+import it.post.app.ui.common.bindImage
 import it.post.app.ui.common.showToasty
 import kotlinx.coroutines.launch
 
 class PostFragment : Fragment() {
 
-    private var _binding: EpoxyLayoutBinding? = null
+    private var _binding: FragmentPostBinding? = null
     private val binding get() = _binding!!
 
     private val args by navArgs<PostFragmentArgs>()
@@ -40,7 +40,7 @@ class PostFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = EpoxyLayoutBinding.inflate(inflater, container, false)
+        _binding = FragmentPostBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -58,28 +58,23 @@ class PostFragment : Fragment() {
         }
     }
 
-    private fun EpoxyLayoutBinding.setup() {
+    private fun FragmentPostBinding.setup() {
         swipeToRefresh.setOnRefreshListener {
             viewModel.fetch()
         }
     }
 
-    private fun EpoxyLayoutBinding.render(state: PostState) {
+    private fun FragmentPostBinding.render(state: PostState) {
         swipeToRefresh.isRefreshing = state.isFetching
 
-        epoxy.withModels {
-            state.story?.let {
-                postDetails {
-                    id(it.id)
-                    props(it)
-                }
-            }
+        askToPull.root.isVisible = state.isFailed
+        content.isVisible = !state.isFailed
 
-            if (state.isFailed) {
-                askToPull {
-                    id("askToPull")
-                }
-            }
+        state.story?.let {
+            image.bindImage(it.photoUrl)
+            image.contentDescription = it.caption
+            description.text = it.caption
+            timeAgo.text = it.timeAgo
         }
 
         state.message?.let {
