@@ -1,6 +1,8 @@
 package it.post.app.ui.feed
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -156,6 +158,10 @@ class FeedFragment : Fragment() {
                     return when (menuItem.itemId) {
                         R.id.menu_log_out -> {
                             viewModel.logout()
+                            true
+                        }
+                        R.id.menu_change_language -> {
+                            startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
                             true
                         }
                         else -> false

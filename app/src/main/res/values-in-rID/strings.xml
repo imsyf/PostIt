@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Post It</string>
+    <string name="login">Masuk</string>
+    <string name="log_out">Keluar</string>
+    <string name="email">Email</string>
+    <string name="password">Kata sandi</string>
+    <string name="or">Atau</string>
+    <string name="create_new_account">Buat akun baru</string>
+    <string name="register">Daftar</string>
+    <string name="login_welcome">Selamat datang kembali, %s!</string>
+    <string name="register_welcome">Selamat bergabung, %s!</string>
+    <string name="page_loaded">Selesai memuat Halaman %d</string>
+    <string name="fetching_failed">Gagal mengunduh data</string>
+    <string name="try_again">Coba Lagi</string>
+    <string name="name">Nama</string>
+    <string name="name_validation_error">Nama tidak boleh kosong</string>
+    <string name="desc_validation_error">Deskripsi tidak boleh kosong</string>
+    <string name="logging_you_in">Pendaftaran berhasil, masuk ke akun</string>
+    <string name="new_post">Posting baru</string>
+    <string name="create_new_post">Buat posting baru</string>
+    <string name="upload">Unggah</string>
+    <string name="no_image_selected">Gambarmu akan tampil di sini</string>
+    <string name="description">Deskripsi</string>
+    <string name="image_uploaded">Gambar berhasil diunggah</string>
+    <string name="change_language">Pilih bahasa</string>
+    <string name="email_validation_error">Bukan alamat email yang valid</string>
+    <string name="password_validation_error">Setidaknya harus 6 karakter</string>
+    <string name="feed">Lini Masa</string>
+    <string name="post">Posting</string>
+    <string name="try_pull_to_refresh">Coba tarik untuk mengulang</string>
+</resources>

@@ -4,6 +4,11 @@
     tools:context="it.post.app.ui.MainActivity">
 
     <item
+        android:id="@+id/menu_change_language"
+        android:title="@string/change_language"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/menu_log_out"
         android:title="@string/log_out"
         app:showAsAction="never" />

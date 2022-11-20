@@ -28,4 +28,5 @@
     <string name="no_image_selected">Your image will appear here</string>
     <string name="description">Description</string>
     <string name="image_uploaded">Image uploaded</string>
+    <string name="change_language">Change language</string>
 </resources>
