@@ -16,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import it.post.app.PostItApp
 import it.post.app.R
@@ -102,12 +103,20 @@ class FeedFragment : Fragment() {
                 feedItem {
                     id(it.id)
                     props(it)
-                    onClick { _, _, _, _ ->
+                    onClick { _, _, clickedView, _ ->
+                        val extras = FragmentNavigatorExtras(
+                            Pair(
+                                clickedView.findViewById(R.id.image),
+                                it.id,
+                            ),
+                        )
+
                         val directions = FeedFragmentDirections.toPostFragment(
                             name = it.name,
                             storyId = it.id,
                         )
-                        findNavController().navigate(directions)
+
+                        findNavController().navigate(directions, extras)
                     }
                 }
             }

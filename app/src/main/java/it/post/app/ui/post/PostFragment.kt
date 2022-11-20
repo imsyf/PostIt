@@ -13,6 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.fragment.navArgs
+import androidx.transition.TransitionInflater
 import it.post.app.PostItApp
 import it.post.app.databinding.FragmentPostBinding
 import it.post.app.ui.common.bindImage
@@ -33,6 +34,14 @@ class PostFragment : Fragment() {
                 PostViewModel(args.storyId, app.storyRepository)
             }
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        sharedElementEnterTransition = TransitionInflater
+            .from(requireContext())
+            .inflateTransition(android.R.transition.move)
     }
 
     override fun onCreateView(
@@ -59,6 +68,8 @@ class PostFragment : Fragment() {
     }
 
     private fun FragmentPostBinding.setup() {
+        image.transitionName = args.storyId
+
         swipeToRefresh.setOnRefreshListener {
             viewModel.fetch()
         }
