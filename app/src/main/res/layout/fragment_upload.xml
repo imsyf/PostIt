@@ -66,27 +66,25 @@
             app:layout_constraintStart_toStartOf="@id/image"
             app:layout_constraintTop_toTopOf="@id/image" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/label_for_description"
+        <it.post.app.ui.common.TextInputView
+            android:id="@+id/description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:hint="@string/description"
-            app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/image">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top|start"
                 android:inputType="textMultiLine"
                 android:minLines="4" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+        </it.post.app.ui.common.TextInputView>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/upload"
@@ -97,7 +95,7 @@
             android:text="@string/upload"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/label_for_description" />
+            app:layout_constraintTop_toBottomOf="@id/description" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

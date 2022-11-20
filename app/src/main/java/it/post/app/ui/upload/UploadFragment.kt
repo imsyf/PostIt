@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -95,17 +94,12 @@ class UploadFragment : Fragment() {
                 .createIntentFromDialog(launcher::launch)
         }
 
-        description.doOnTextChanged { text, _, _, _ ->
-            val desc = "$text"
-
-            if (desc.isBlank()) {
-                labelForDescription.error = getString(R.string.desc_validation_error)
-            } else {
-                labelForDescription.error = null
-            }
-
-            viewModel.onDescriptionChanged(desc, labelForDescription.error == null)
-        }
+        description.bind(
+            value = viewModel.state.value.description,
+            onValueChanged = viewModel::onDescriptionChanged,
+            validation = String::isNotBlank,
+            errorMessage = R.string.desc_validation_error,
+        )
 
         upload.setOnClickListener {
             root.requestFocus()
@@ -115,7 +109,7 @@ class UploadFragment : Fragment() {
 
     private fun FragmentUploadBinding.render(state: UploadState) {
         loading.isVisible = state.isBusy
-        description.isEnabled = !state.isBusy
+        description.editText?.isEnabled = !state.isBusy
 
         if (state.isImageSelected) {
             image.setImageURI(state.imageUri)
