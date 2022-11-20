@@ -82,17 +82,10 @@ class RegisterFragment : Fragment() {
             viewModel.onEmailChanged(email, labelForRegisterEmail.error == null)
         }
 
-        registerPassword.doOnTextChanged { text, _, _, _ ->
-            val password = "$text"
-
-            if (password.isBlank() || password.length < 6) {
-                labelForRegisterPassword.error = getString(R.string.password_validation_error)
-            } else {
-                labelForRegisterPassword.error = null
-            }
-
-            viewModel.onPasswordChanged(password, labelForRegisterPassword.error == null)
-        }
+        registerPassword.bind(
+            value = viewModel.state.value.password,
+            onValueChanged = viewModel::onPasswordChanged,
+        )
 
         register.setOnClickListener {
             root.requestFocus()
@@ -105,7 +98,7 @@ class RegisterFragment : Fragment() {
 
         registerName.isEnabled = !state.isSubmitting
         registerEmail.isEnabled = !state.isSubmitting
-        registerPassword.isEnabled = !state.isSubmitting
+        registerPassword.editText?.isEnabled = !state.isSubmitting
 
         register.isEnabled = state.canRegister
 

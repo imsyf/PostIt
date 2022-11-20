@@ -71,17 +71,10 @@ class LoginFragment : Fragment() {
             viewModel.onEmailChanged(email, labelForLoginEmail.error == null)
         }
 
-        loginPassword.doOnTextChanged { text, _, _, _ ->
-            val password = "$text"
-
-            if (password.isBlank() || password.length < 6) {
-                labelForLoginPassword.error = getString(R.string.password_validation_error)
-            } else {
-                labelForLoginPassword.error = null
-            }
-
-            viewModel.onPasswordChanged(password, labelForLoginPassword.error == null)
-        }
+        loginPassword.bind(
+            value = viewModel.state.value.password,
+            onValueChanged = viewModel::onPasswordChanged,
+        )
 
         login.setOnClickListener {
             root.requestFocus()
@@ -98,7 +91,7 @@ class LoginFragment : Fragment() {
         loading.isVisible = state.isSubmitting
 
         loginEmail.isEnabled = !state.isSubmitting
-        loginPassword.isEnabled = !state.isSubmitting
+        loginPassword.editText?.isEnabled = !state.isSubmitting
 
         login.isEnabled = state.canLogin
 
