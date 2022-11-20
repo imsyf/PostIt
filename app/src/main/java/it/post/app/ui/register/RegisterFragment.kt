@@ -1,7 +1,6 @@
 package it.post.app.ui.register
 
 import android.os.Bundle
-import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -70,17 +69,10 @@ class RegisterFragment : Fragment() {
             viewModel.onNameChanged(name, labelForRegisterName.error == null)
         }
 
-        registerEmail.doOnTextChanged { text, _, _, _ ->
-            val email = "$text"
-
-            if (email.isBlank() || Patterns.EMAIL_ADDRESS.matcher(email).matches().not()) {
-                labelForRegisterEmail.error = getString(R.string.email_validation_error)
-            } else {
-                labelForRegisterEmail.error = null
-            }
-
-            viewModel.onEmailChanged(email, labelForRegisterEmail.error == null)
-        }
+        registerEmail.bind(
+            value = viewModel.state.value.email,
+            onValueChanged = viewModel::onEmailChanged,
+        )
 
         registerPassword.bind(
             value = viewModel.state.value.password,
@@ -97,7 +89,7 @@ class RegisterFragment : Fragment() {
         loading.isVisible = state.isSubmitting
 
         registerName.isEnabled = !state.isSubmitting
-        registerEmail.isEnabled = !state.isSubmitting
+        registerEmail.editText?.isEnabled = !state.isSubmitting
         registerPassword.editText?.isEnabled = !state.isSubmitting
 
         register.isEnabled = state.canRegister
